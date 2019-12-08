@@ -1,8 +1,10 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import User from './components/User';
 import { BrowserRouter, Route } from 'react-router-dom';
+import Home from './components/Home';
+import NewUser from './components/NewUser';
+import UserDetails from './components/UserDetails';
+import EditUser from './components/EditUser';
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
         <Navbar />
         <div className="container">
           <Route exact path='/' component={() => <Home /> } />
-          <Route path='/user/:user_id' render={(props) => <User {...props} /> } />
+          <Route path='/user/:user_id' component={(props) => <UserDetails {...props} /> } />
+          <Route path='/new_user' component={(props) => <NewUser {...props} /> } />
+          <Route path='/edit_user/:user_id' component={(props) => <EditUser {...props} /> } />
         </div>
       </div>
     </BrowserRouter>

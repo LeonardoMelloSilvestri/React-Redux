@@ -7,13 +7,29 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-  if(action.type === 'DELETE_USER') {
-    const newUsers = state.users.filter(user => action.id !== user.id )
-    return {
-      ...state,
-      users: newUsers
-    }
+  switch (action.type) {
+    case 'DELETE_USER':
+      const deletedUsers = state.users.filter(user => action.id !== user.id)
+      return {
+        ...state,
+        users: deletedUsers
+      }
+    case 'ADD_USER':
+      action.state.id = state.users.length + 1;
+      const addingUsers = [...state.users, action.state]
+      return {
+        users: addingUsers
+      }
+    case 'EDIT_USER':
+      const newUsers = [...state.users]
+      newUsers[action.state.id - 1] = action.state
+      
+      return {
+        users: newUsers
+      }
+      
   }
+
   return state;
 }
 
